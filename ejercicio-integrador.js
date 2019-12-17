@@ -1,10 +1,10 @@
 let productosAlaVenta = [
-    
-    [1, "Notebook Lenobo S400", 100, "si", 1],
-    [2, "Celular Notorola G5", 135, "no", 1],
-    [3, "Smart TV Filis 43'", 190, "si", 1],
-    [4,	"Sorny PS 7", 215, "si", 1]
-    
+
+    [1, "Notebook Lenobo S400", 100, "si"],
+    [2, "Celular Notorola G5", 135, "no"],
+    [3, "Smart TV Filis 43'", 190, "si"],
+    [4, "Sorny PS 7", 215, "si"]
+
 ]
 
 let carritoDeCompra = [];
@@ -12,18 +12,15 @@ let Id = productosAlaVenta[0]
 let nombreProducto = productosAlaVenta[1]
 let precioProducto = productosAlaVenta[2]
 
-    let mostrarProductos = "";
-    for (let i = 0; i < productosAlaVenta.length; i++) {
-        mostrarProductos = mostrarProductos +
-            `ID: ${productosAlaVenta[i][0]};  NOMBRE: ${productosAlaVenta[i][1]};  PRECIO: ${productosAlaVenta[i][2]};  APLICA DESCUENTO: ${productosAlaVenta[i][3]}
+let mostrarProductos = "";
+for (let i = 0; i < productosAlaVenta.length; i++) {
+    mostrarProductos = mostrarProductos +
+        `ID: ${productosAlaVenta[i][0]};  NOMBRE: ${productosAlaVenta[i][1]};  PRECIO: ${productosAlaVenta[i][2]};  APLICA DESCUENTO: ${productosAlaVenta[i][3]}
 `;
-    }
-    alert(`Bienvenido a nuestra tienda, estos son nuestros productos 
+}
+alert(`Bienvenido a nuestra tienda, estos son nuestros productos 
     ${mostrarProductos}`);
 
-// const agregarProducto = () => {
-
-// }
 
 let volverAlMenuPrincipal = "SI"
 while (volverAlMenuPrincipal == "SI") {
@@ -45,7 +42,7 @@ while (volverAlMenuPrincipal == "SI") {
     if (accion == "AGREGAR") {
         let repetirOperacion = "SI";
         let mostrarProductos = "";
-        
+
         for (let i = 0; i < productosAlaVenta.length; i++) {
             mostrarProductos = mostrarProductos +
                 `ID: ${productosAlaVenta[i][0]};  NOMBRE: ${productosAlaVenta[i][1]};  PRECIO: ${productosAlaVenta[i][2]};  APLICA DESCUENTO: ${productosAlaVenta[i][3]}
@@ -57,15 +54,17 @@ while (volverAlMenuPrincipal == "SI") {
         let idValido = false;
         for (let i = 0; i < productosAlaVenta.length; i++) {
             for (let j = 0; j < productosAlaVenta[i].length; j++) {
-            
+
                 if (productoAAgregar == productosAlaVenta[i][j]) {
                     let cantidadAAgregar = prompt("Cuántas unidades desea agregar?")
-                    productosAlaVenta 
-                    
-                    carritoDeCompra.push(productosAlaVenta[i])
+                    for (let k = 1; k <= cantidadAAgregar; k++) {
+                        carritoDeCompra.push(productosAlaVenta[i]);
+
+                    }
+
                     idValido = true;
                 }
-                
+
             }
         }
         if (idValido === false) {
@@ -98,7 +97,7 @@ while (volverAlMenuPrincipal == "SI") {
 //             repetirOperacion = repetirOperacion.toUpperCase()
 //         }
 
-        
+
 //     }
 
 //     if (accion == "LISTAR") {
