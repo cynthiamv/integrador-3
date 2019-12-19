@@ -21,7 +21,7 @@ let carritoDeCompra = [];
 
 
 const catalogo = () => {
-   let mostrarProductos = "";
+    let mostrarProductos = "";
     for (let i = 0; i < productosAlaVenta.length; i++) {
         mostrarProductos = mostrarProductos +
             `ID: ${productosAlaVenta[i][0]};  NOMBRE: ${productosAlaVenta[i][1]};  PRECIO: ${productosAlaVenta[i][2]};  APLICA DESCUENTO: ${productosAlaVenta[i][3]}
@@ -55,33 +55,52 @@ while (volverAlMenuPrincipal == "SI") {
     //Mientras el cliente siga haciendo cosas tiene que volver al menu inicial
     if (accion == "AGREGAR") {
         //         let repetirOperacion = "SI";
- 
-        let productoAAgregar = prompt(`${catalogo()}
+
+        const agregarAlCarrito = () => {
+            let productoAAgregar = prompt(`${catalogo()}
         Indique el id del productor que desea agregar al carrito`);
         /*
                     Si el producto existe, preguntar cuantas unidades va a llevar del producto y agregarlo al carrito
                     Si el producto ya se encontraba en el carrito, debe incrementar la cantidad de unidades que está comprando
                     */
+
         let idValido = false;
         for (let i = 0; i < productosAlaVenta.length; i++) {
             for (let j = 0; j < productosAlaVenta[i].length; j++) {
 
                 if (productoAAgregar == productosAlaVenta[i][j]) {
                     let cantidadAAgregar = prompt("Cuántas unidades desea agregar?")
-                    for (let k = 1; k <= cantidadAAgregar; k++) {
-                        carritoDeCompra.push(productosAlaVenta[i]);
+                    idValido = true
 
+                    if (carritoDeCompra.length == 0) {
+                        carritoDeCompra.push(productosAlaVenta[i])
+                        carritoDeCompra[0][4] = cantidadAAgregar
                     }
-
-                    idValido = true;
+                    else {
+                        for (let i = 0; i < carritoDeCompra.length; i++) {
+                            if (carritoDeCompra[i][0] == productoAAgregar) {
+                                carritoDeCompra[i][4] += cantidadAAgregar
+                            }
+                            else {
+                                carritoDeCompra.push(productosAlaVenta[i])
+                                carritoDeCompra[i][4].push(cantidadAAgregar)
+                            }
+                        }
+                    }
                 }
-
             }
         }
         if (idValido === false) {
             alert("Ingrese un id valido")
         }
-        console.log(carritoDeCompra)
+        console.log(`Carrito de compra: ${carritoDeCompra}`)
+
+        }
+
+        const repetirOperacion = () => {
+            let confirmacion prompt("Desea repetir la operacion?") 
+            if ()
+        }
     }
     volverAlMenuPrincipal = "no"
 }
