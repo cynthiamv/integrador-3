@@ -53,54 +53,66 @@ while (volverAlMenuPrincipal == "SI") {
     //Primero tenemos que conseguir meter los productos en el carrito. Tantos como el cliente quiera y si desea agregar mas sumarlos a los existentes
     // Y entonces empezamos a trabajar con el array carrito
     //Mientras el cliente siga haciendo cosas tiene que volver al menu inicial
-    if (accion == "AGREGAR") {
-        //         let repetirOperacion = "SI";
+    const agregarAlCarrito = () => {
+        let productoAAgregar = prompt(`${catalogo()}
+    Indique el id del productor que desea agregar al carrito`);
+    /*
+                Si el producto existe, preguntar cuantas unidades va a llevar del producto y agregarlo al carrito
+                Si el producto ya se encontraba en el carrito, debe incrementar la cantidad de unidades que está comprando
+                */
 
-        const agregarAlCarrito = () => {
-            let productoAAgregar = prompt(`${catalogo()}
-        Indique el id del productor que desea agregar al carrito`);
-        /*
-                    Si el producto existe, preguntar cuantas unidades va a llevar del producto y agregarlo al carrito
-                    Si el producto ya se encontraba en el carrito, debe incrementar la cantidad de unidades que está comprando
-                    */
+    let idValido = false;
+    for (let i = 0; i < productosAlaVenta.length; i++) {
+        for (let j = 0; j < productosAlaVenta[i].length; j++) {
 
-        let idValido = false;
-        for (let i = 0; i < productosAlaVenta.length; i++) {
-            for (let j = 0; j < productosAlaVenta[i].length; j++) {
+            if (productoAAgregar == productosAlaVenta[i][j]) {
+                let cantidadAAgregar = prompt("Cuántas unidades desea agregar?")
+                idValido = true
 
-                if (productoAAgregar == productosAlaVenta[i][j]) {
-                    let cantidadAAgregar = prompt("Cuántas unidades desea agregar?")
-                    idValido = true
-
-                    if (carritoDeCompra.length == 0) {
-                        carritoDeCompra.push(productosAlaVenta[i])
-                        carritoDeCompra[0][4] = cantidadAAgregar
-                    }
-                    else {
-                        for (let i = 0; i < carritoDeCompra.length; i++) {
-                            if (carritoDeCompra[i][0] == productoAAgregar) {
-                                carritoDeCompra[i][4] += cantidadAAgregar
-                            }
-                            else {
-                                carritoDeCompra.push(productosAlaVenta[i])
-                                carritoDeCompra[i][4].push(cantidadAAgregar)
-                            }
+                if (carritoDeCompra.length == 0) {
+                    carritoDeCompra.push(productosAlaVenta[i])
+                    carritoDeCompra[0][4] = cantidadAAgregar
+                }
+                else {
+                    for (let i = 0; i < carritoDeCompra.length; i++) {
+                        if (carritoDeCompra[i][0] == productoAAgregar) {
+                            carritoDeCompra[i][4] += cantidadAAgregar
+                        }
+                        else {
+                            carritoDeCompra.push(productosAlaVenta[i])
+                            carritoDeCompra[i][4].push(cantidadAAgregar)
                         }
                     }
                 }
             }
         }
-        if (idValido === false) {
-            alert("Ingrese un id valido")
-        }
-        console.log(`Carrito de compra: ${carritoDeCompra}`)
+    }
+    if (idValido === false) {
+        alert("Ingrese un id valido")
+    }
+    console.log(`Carrito de compra: ${carritoDeCompra}`)
 
-        }
+    }
+    if (accion == "AGREGAR") {
+        //         let repetirOperacion = "SI";
 
-        const repetirOperacion = () => {
-            let confirmacion prompt("Desea repetir la operacion?") 
-            if ()
-        }
+        agregarAlCarrito()
+
+        const repetirOperacion = (str) => {
+            let confirmacion = prompt("Desea repetir la operacion?") 
+            if (confirmacion === "NO") {
+                volverAlMenuPrincipal = "SI";
+            } else if (confirmacion !== "SI") {
+    
+                alert(`
+                🚫 Opción inválida
+                🙏 Por favor, ingresar una opción correcta`);
+            } else {
+                agregarAlCarrito()
+            }
+
+
+        // }
     }
     volverAlMenuPrincipal = "no"
 }
