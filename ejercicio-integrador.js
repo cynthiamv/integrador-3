@@ -99,8 +99,7 @@ while (volverAlMenuPrincipal == "SI") {
                     }
                 }
             }
-            console.log (carritoDeCompra)
-            }
+        }
         if (idValido === false) {
             alert("Ingrese un id valido")
         }
@@ -122,25 +121,25 @@ while (volverAlMenuPrincipal == "SI") {
         return detalleDelCarrito;
     }
 
+    const repetirOperacion = () => {
+        let confirmacion = prompt("Desea repetir la operacion?");
+        confirmacion = confirmacion.toUpperCase()
+        if (confirmacion === "NO") {
+            volverAlMenuPrincipal = "SI";
+        } else if (confirmacion !== "SI") {
+            alert(`
+                 Opción inválida: Por favor, ingresar una opción correcta`);
+        } else {
+            agregarAlCarrito()
+        }
+    }
 
-    if (accion.toUpperCase() == "AGREGAR") {
+    if (accion == "AGREGAR") {
         //let repetirOperacion = "SI";
         agregarAlCarrito()
-        const repetirOperacion = () => {
-            let confirmacion = prompt("Desea repetir la operacion?");
-            confirmacion = confirmacion.toUpperCase()
-            if (confirmacion === "NO") {
-                volverAlMenuPrincipal = "SI";
-            } else if (confirmacion !== "SI") {
-                alert(`
-                     Opción inválida: Por favor, ingresar una opción correcta`);
-            } else {
-                agregarAlCarrito()
-            }
-        }
         repetirOperacion()
     }
-    else if (accion.toUpperCase() === "MOSTRAR") {
+    else if (accion === "MOSTRAR") {
         mostrarDetalle()
     }
     volverAlMenuPrincipal = "SI"
