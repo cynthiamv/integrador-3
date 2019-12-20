@@ -48,6 +48,13 @@ while (volverAlMenuPrincipal == "SI") {
     volverAlMenuPrincipal = volverAlMenuPrincipal.toUpperCase()
     accion = accion.toUpperCase()
 
+    const repetirOperacion = () => {
+        let confirmacion = prompt("Desea repetir la operacion?") 
+        if (confirmacion == "SI") {
+
+        }
+    }
+
 
     //     //...............AGREGAR productos al carrito..............
     //Primero tenemos que conseguir meter los productos en el carrito. Tantos como el cliente quiera y si desea agregar mas sumarlos a los existentes
@@ -94,12 +101,18 @@ while (volverAlMenuPrincipal == "SI") {
             alert("Ingrese un id valido")
         }
         console.log(`Carrito de compra: ${carritoDeCompra}`)
-
         }
 
         const repetirOperacion = () => {
-            let confirmacion prompt("Desea repetir la operacion?") 
-            if ()
+            let confirmacion = prompt("Desea repetir la operacion?") 
+            if (confirmacion === "NO") {
+                volverAlMenuPrincipal = "SI";
+            } else if (confirmacion !== "SI") {
+    
+                alert(`
+                🚫 Opción inválida
+                🙏 Por favor, ingresar una opción correcta`);
+            }
         }
     }
     volverAlMenuPrincipal = "no"
