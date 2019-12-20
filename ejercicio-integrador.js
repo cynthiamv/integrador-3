@@ -144,3 +144,21 @@ while (volverAlMenuPrincipal == "SI") {
     }
     volverAlMenuPrincipal = "SI"
 }
+
+//............... ELIMINAR un producto al carrito..............
+
+//............... VACIAR el carrito..............
+
+let vaciarCarrito = ""
+if (accion == "VACIAR") {
+    vaciarCarrito = prompt(`Desea confirmar la acción? Se quitarán todos los productos del carrito.`)
+    vaciarCarrito = vaciarCarrito.toUpperCase
+    if (vaciarCarrito = "SI") {
+        carritoDeCompra = []
+        alert(`Ud. ha vaciado el carrito satisfactoriamente.`)
+    }
+    else {
+        alert(`La operación fue cancelada.`)
+    }
+    volverAlMenuPrincipal()
+}
