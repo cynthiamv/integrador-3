@@ -99,8 +99,8 @@ while (volverAlMenuPrincipal == "SI") {
                     }
                 }
             }
-
-        }
+            console.log (carritoDeCompra)
+            }
         if (idValido === false) {
             alert("Ingrese un id valido")
         }
