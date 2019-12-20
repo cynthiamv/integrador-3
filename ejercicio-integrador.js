@@ -52,7 +52,7 @@ alert(`Bienvenido a nuestra tienda, estos son nuestros productos
     ${catalogo()}`)
 
 //Opciones para el cliente
-l
+
 let volverAlMenuPrincipal = "SI"
 while (volverAlMenuPrincipal == "SI") {
     accion = prompt(`Seleccione una operacion:
@@ -83,17 +83,15 @@ while (volverAlMenuPrincipal == "SI") {
                         carritoDeCompra[0][4] = cantidadAAgregar
                     } else {
                         for (let i = 0; i < carritoDeCompra.length; i++) {
-                            if (carritoDeCompra[i][0] == productosAlaVenta[i]) {
-                                // 62 era carritoDeCompra[i][0] == productosAlaVenta
+                            if (carritoDeCompra[i][0] == productoAAgregar) {
+                              
                                 carritoDeCompra[i][4] += cantidadAAgregar
                             }
-                            //else {
-                            //carritoDeCompra.push(productoAAgregar[i])
-                            //carritoDeCompra[i][4].push(cantidadAAgregar)
-                            // No sé bien por qué, pero me tiraba error en la linea 67
-                            // La dejo comentada porque así funciona pero no entiendo
-                            // y quiero entender
-                            //}
+                            else {
+                                carritoDeCompra.push(productoAAgregar[i])
+                                carritoDeCompra[i][4] = cantidadAAgregar
+                            };
+
                         }
                     }
                 }
@@ -109,7 +107,8 @@ while (volverAlMenuPrincipal == "SI") {
         agregarAlCarrito()
     }
     const repetirOperacion = (str) => {
-        let confirmacion = prompt("Desea repetir la operacion?")
+        let confirmacion = prompt("Desea repetir la operacion?");
+        confirmacion = confirmacion.toUpperCase()
         if (confirmacion === "NO") {
             volverAlMenuPrincipal = "SI";
         } else if (confirmacion !== "SI") {
