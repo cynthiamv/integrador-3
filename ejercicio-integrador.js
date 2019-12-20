@@ -83,13 +83,14 @@ while (volverAlMenuPrincipal == "SI") {
                     if (carritoDeCompra.length == 0) {
                         carritoDeCompra.push(productosAlaVenta[i])
                         carritoDeCompra[0][4] = cantidadAAgregar
-                    } 
+                    }
                     else {
                         for (let i = 0; i < carritoDeCompra.length; i++) {
                             if (carritoDeCompra[i][0] == productoAAgregar) {
                                 carritoDeCompra[i][4] += cantidadAAgregar
                             }
                             else {
+                                console.log(cantidadAAgregar)
                                 carritoDeCompra.push(productoNuevo)
                                 carritoDeCompra[i][4] = cantidadAAgregar
                             };
@@ -98,11 +99,12 @@ while (volverAlMenuPrincipal == "SI") {
                     }
                 }
             }
-            console.log(`Carrito de compra: ${carritoDeCompra}`)
+
         }
         if (idValido === false) {
             alert("Ingrese un id valido")
         }
+        console.log(carritoDeCompra)
     }
 
     const mostrarDetalle = () => {
@@ -132,10 +134,8 @@ while (volverAlMenuPrincipal == "SI") {
             } else if (confirmacion !== "SI") {
                 alert(`
                      Opción inválida: Por favor, ingresar una opción correcta`);
-                repetirOperacion()
             } else {
                 agregarAlCarrito()
-                repetirOperacion()
             }
         }
         repetirOperacion()
