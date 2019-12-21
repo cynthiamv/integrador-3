@@ -121,6 +121,31 @@ while (volverAlMenuPrincipal == "SI") {
         return detalleDelCarrito;
     }
 
+    const vaciarCarrito = () => {
+        let confirmarVaciarCarrito = prompt(`Desea confirmar la acción? Se quitarán todos los productos del carrito.`)
+        confirmarVaciarCarrito = confirmarVaciarCarrito.toUpperCase()
+        if (confirmarVaciarCarrito == "SI") {
+            alert(`Ud. ha vaciado el carrito satisfactoriamente.`)
+            carritoDeCompra = []   
+        }
+        else {
+            alert(`La operación fue cancelada.`)
+        }
+        volverAlMenuPrincipal = "SI"
+    }
+
+    const cancelarCompra = () => {
+        let confirma = prompt('Confirma que quiere cancelar SI - NO?')
+        confirma = confirma.toUpperCase()
+        if (confirma == "SI") {
+            alert('Hasta pronto')
+            volverAlMenuPrincipal = "NO"
+        }
+        else {
+            volverAlMenuPrincipal = "SI"
+        }; 
+    }
+
     const repetirOperacion = () => {
         let confirmacion = prompt("Desea repetir la operacion?");
         confirmacion = confirmacion.toUpperCase()
@@ -139,26 +164,18 @@ while (volverAlMenuPrincipal == "SI") {
         agregarAlCarrito()
         repetirOperacion()
     }
-    else if (accion === "MOSTRAR") {
-        mostrarDetalle()
+    else if (accion == "MOSTRAR") {
+         alert(mostrarDetalle())
+    } 
+    else if (accion == "CANCELAR") {
+        cancelarCompra()
     }
-    volverAlMenuPrincipal = "SI"
-}
-
-//............... ELIMINAR un producto al carrito..............
-
-//............... VACIAR el carrito..............
-
-let vaciarCarrito = ""
-if (accion == "VACIAR") {
-    vaciarCarrito = prompt(`Desea confirmar la acción? Se quitarán todos los productos del carrito.`)
-    vaciarCarrito = vaciarCarrito.toUpperCase
-    if (vaciarCarrito = "SI") {
-        carritoDeCompra = []
-        alert(`Ud. ha vaciado el carrito satisfactoriamente.`)
+    else if (accion == "VACIAR") {
+        vaciarCarrito()
     }
     else {
-        alert(`La operación fue cancelada.`)
-    }
-    volverAlMenuPrincipal()
+        alert(`Hola Mundo`)
+    };
+     volverAlMenuPrincipal = "SI"
 }
+
