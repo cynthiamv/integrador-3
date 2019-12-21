@@ -65,6 +65,12 @@ while (volverAlMenuPrincipal == "SI") {
      [CANCELAR] compra `);
     volverAlMenuPrincipal = volverAlMenuPrincipal.toUpperCase()
     accion = accion.toUpperCase()
+
+    
+
+
+
+
     //     //...............AGREGAR productos al carrito..............
 
     const agregarAlCarrito = () => {
@@ -140,10 +146,12 @@ while (volverAlMenuPrincipal == "SI") {
         if (confirma == "SI") {
             alert('Hasta pronto')
             volverAlMenuPrincipal = "NO"
+            
         }
+        
         else {
             volverAlMenuPrincipal = "SI"
-        }; 
+        };
     }
 
     const repetirOperacion = () => {
@@ -158,7 +166,6 @@ while (volverAlMenuPrincipal == "SI") {
             agregarAlCarrito()
         }
     }
-
     if (accion == "AGREGAR") {
         //let repetirOperacion = "SI";
         agregarAlCarrito()
@@ -173,9 +180,12 @@ while (volverAlMenuPrincipal == "SI") {
     else if (accion == "VACIAR") {
         vaciarCarrito()
     }
+    else if (accion == "CANCELAR") {
+        cancelarCompra()
+    }
     else {
-        alert(`Hola Mundo`)
+        alert(`No ha elegido una opción válida`)
     };
-     volverAlMenuPrincipal = "SI"
+    //  volverAlMenuPrincipal = "SI"
 }
 
