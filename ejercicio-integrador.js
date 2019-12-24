@@ -33,6 +33,7 @@ let productosAlaVenta = [
     [4, "Sorny PS 7", 215, "si"]
 ]
 let carritoDeCompra = [];
+let accion = "";
 
 //Bienvenida
 
@@ -51,65 +52,59 @@ const catalogo = () => {
 alert(`Bienvenido a nuestra tienda, estos son nuestros productos:
     ${catalogo()}`)
 
-//Opciones para el cliente
 
-let volverAlMenuPrincipal = "SI"
-while (volverAlMenuPrincipal == "SI") {
-    accion = prompt(`Seleccione una operacion:
-      --------------------------
-     [AGREGAR] un producto
-     [MOSTRAR] detalle :página_boca_arriba:
-     [ELIMINAR] un producto 
-     [VACIAR] carrito
-     [CONFIRMAR] compra
-     [CANCELAR] compra `);
-    volverAlMenuPrincipal = volverAlMenuPrincipal.toUpperCase()
-    accion = accion.toUpperCase()
-    //     //...............AGREGAR productos al carrito..............
+//...............AGREGAR productos al carrito..............
 
-    const agregarAlCarrito = () => {
-        let productoNuevo = []
-        let productoAAgregar = prompt(`${catalogo()}
+const agregarAlCarrito = () => {
+    let productoNuevo = []
+    let productoAAgregar = prompt(`${catalogo()}
     Indique el id del productor que desea agregar al carrito`);
 
-        let idValido = false;
-        for (let i = 0; i < productosAlaVenta.length; i++) {
-            for (let j = 0; j < productosAlaVenta[i].length; j++) {
-                if (productoAAgregar == productosAlaVenta[i][j]) {
-                    let cantidadAAgregar = prompt("Cuántas unidades desea agregar?")
-                    cantidadAAgregar = parseInt(cantidadAAgregar)
-                    idValido = true
-                    productoNuevo = productosAlaVenta[i]
-                    if (carritoDeCompra.length == 0) {
-                        carritoDeCompra.push(productosAlaVenta[i])
-                        carritoDeCompra[0][4] = cantidadAAgregar
+    let idValido = false;
+    for (let i = 0; i < productosAlaVenta.length; i++) {
+        // for (let j = 0; j < productosAlaVenta[i][0].length; j++) {
+        if (productoAAgregar == productosAlaVenta[i][0]) {
+            let cantidadAAgregar = Number(prompt("Cuántas unidades desea agregar?"))
+            // cantidadAAgregar = Number(cantidadAAgregar)
+            idValido = true
+            productoNuevo = productosAlaVenta[i]
+            if (carritoDeCompra.length == 0) {
+                carritoDeCompra.push(productosAlaVenta[i])
+                carritoDeCompra[0][4] = cantidadAAgregar
+            }
+            else {
+                for (let k = 0; k < carritoDeCompra.length; k++) {
+                    if (carritoDeCompra[k][0] == productoAAgregar) {
+                        carritoDeCompra[k][4] += cantidadAAgregar
+                        break;
                     }
                     else {
-                        for (let i = 0; i < carritoDeCompra.length; i++) {
-                            if (carritoDeCompra[i][0] == productoAAgregar) {
-                                carritoDeCompra[i][4] += cantidadAAgregar
-                            }
-                            else {
-                                console.log(cantidadAAgregar)
-                                carritoDeCompra.push(productoNuevo)
-                                carritoDeCompra[i][4] = cantidadAAgregar
-                            };
+                        // debugger
+                        productoNuevo.push(cantidadAAgregar)
+                        console.log(productoNuevo)
+                        carritoDeCompra.push(productoNuevo)
+                        console.log(carritoDeCompra)
+                        break;
+                    };
 
-                        }
-                    }
+
                 }
             }
         }
-        if (idValido === false) {
-            alert("Ingrese un id valido")
-        }
-        console.log(carritoDeCompra)
+        // }
     }
+    if (idValido === false) {
+        alert("Ingrese un id valido")
+    }
+    console.log(carritoDeCompra)
+    repetirOperacion()
+}
 
-    const mostrarDetalle = () => {
-        let detalleDelCarrito = "";
-        for (let i = 0; i < carritoDeCompra.length; i++) {
-            detalleDelCarrito += `
+const mostrarDetalle = () => {
+    let detalleDelCarrito = "";
+    accion = "";
+    for (let i = 0; i < carritoDeCompra.length; i++) {
+        detalleDelCarrito += `
                        🆔 ID: ${carritoDeCompra[i][0]} 
                        👤 Producto: ${carritoDeCompra[i][1]}
                        Precio ${carritoDeCompra[i][2]}
@@ -117,65 +112,87 @@ while (volverAlMenuPrincipal == "SI") {
                        Cantidad de unidades: ${carritoDeCompra[i][4]}
                        ----------------------
                        `;
-        }
-        return detalleDelCarrito;
+    }
+    if (detalleDelCarrito == "") {
+        detalleDelCarrito = alert(`El carrito está vacío. Ingrese al menú principal para agregar productos`)
+    }
+    return detalleDelCarrito;
+}
+
+const vaciarCarrito = () => {
+    let confirmarVaciarCarrito = prompt(`Desea confirmar la acción? Se quitarán todos los productos del carrito.`)
+    confirmarVaciarCarrito = confirmarVaciarCarrito.toUpperCase()
+    if (confirmarVaciarCarrito == "SI") {
+        alert(`Ud. ha vaciado el carrito satisfactoriamente.`)
+        carritoDeCompra = []
+    }
+    else {
+        alert(`La operación fue cancelada.`)
+    }
+    accion = ""
+}
+
+const cancelarCompra = () => {
+    let confirma = prompt('Confirma que quiere cancelar SI - NO?')
+    confirma = confirma.toUpperCase()
+    if (confirma == "SI") {
+        alert('Hasta pronto')
+        accion = "SALIR"
+    }
+    else {
+        accion = ""
     }
 
-    const vaciarCarrito = () => {
-        let confirmarVaciarCarrito = prompt(`Desea confirmar la acción? Se quitarán todos los productos del carrito.`)
-        confirmarVaciarCarrito = confirmarVaciarCarrito.toUpperCase()
-        if (confirmarVaciarCarrito == "SI") {
-            alert(`Ud. ha vaciado el carrito satisfactoriamente.`)
-            carritoDeCompra = []   
-        }
-        else {
-            alert(`La operación fue cancelada.`)
-        }
-        volverAlMenuPrincipal = "SI"
-    }
+}
 
-    const cancelarCompra = () => {
-        let confirma = prompt('Confirma que quiere cancelar SI - NO?')
-        confirma = confirma.toUpperCase()
-        if (confirma == "SI") {
-            alert('Hasta pronto')
-            volverAlMenuPrincipal = "NO"
-        }
-        else {
-            volverAlMenuPrincipal = "SI"
-        }; 
+const repetirOperacion = () => {
+    let confirmacion = prompt("Desea repetir la operacion?");
+    confirmacion = confirmacion.toUpperCase()
+    if (confirmacion === "NO") {
+        accion = "";
+    } else if (confirmacion !== "SI") {
+        alert(`
+             Opción inválida: Por favor, ingresar una opción correcta`);
     }
+}
 
-    const repetirOperacion = () => {
-        let confirmacion = prompt("Desea repetir la operacion?");
-        confirmacion = confirmacion.toUpperCase()
-        if (confirmacion === "NO") {
-            volverAlMenuPrincipal = "SI";
-        } else if (confirmacion !== "SI") {
-            alert(`
-                 Opción inválida: Por favor, ingresar una opción correcta`);
-        } else {
-            agregarAlCarrito()
-        }
+
+while (accion != "SALIR") {
+    // debugger;
+    if (accion == "") {
+        accion = prompt(`Seleccione una operacion:
+        --------------------------
+    [AGREGAR] un producto
+    [MOSTRAR] detalle
+    [ELIMINAR] un producto
+    [VACIAR] carrito
+    [CONFIRMAR] compra
+    [CANCELAR] compra`);
+        accion = accion.toUpperCase()
+        accion = accion.toUpperCase()
     }
 
     if (accion == "AGREGAR") {
         //let repetirOperacion = "SI";
         agregarAlCarrito()
-        repetirOperacion()
     }
     else if (accion == "MOSTRAR") {
-         alert(mostrarDetalle())
-    } 
+        alert(mostrarDetalle())
+    }
     else if (accion == "CANCELAR") {
         cancelarCompra()
+    }
+    else if (accion == "ELIMINAR") {
+        alert(`falta funcion ELIMINAR`)
+        accion = ""
     }
     else if (accion == "VACIAR") {
         vaciarCarrito()
     }
     else {
-        alert(`Hola Mundo`)
-    };
-     volverAlMenuPrincipal = "SI"
+        alert(`El menu todavia no esta desarrollado`)
+        accion = ""
+    }
+    
 }
 
