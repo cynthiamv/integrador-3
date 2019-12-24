@@ -171,7 +171,6 @@ while (accion != "SALIR") {
         accion = accion.toUpperCase()
         accion = accion.toUpperCase()
     }
-
     if (accion == "AGREGAR") {
         //let repetirOperacion = "SI";
         agregarAlCarrito()
@@ -188,6 +187,9 @@ while (accion != "SALIR") {
     }
     else if (accion == "VACIAR") {
         vaciarCarrito()
+    }
+    else if (accion == "CANCELAR") {
+        cancelarCompra()
     }
     else {
         alert(`El menu todavia no esta desarrollado`)
