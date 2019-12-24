@@ -119,6 +119,41 @@ const mostrarDetalle = () => {
     return detalleDelCarrito;
 }
 
+const eliminarProducto = () => {
+    if (carritoDeCompra.length > 0) {
+        let indiceProductoEncontrado = 0
+        let productoAEliminar = parseInt(prompt("Por favor ingrese el id del producto que desea eliminar"))
+        for (let j = 0; j < carritoDeCompra.length; j++) {
+            if (productoAEliminar === carritoDeCompra[j][0]) {
+                indiceProductoEncontrado = j
+                let respuesta = prompt(`Los datos del producto a eliminar son los siguientes:
+            ID: ${carritoDeCompra[j][0]}
+            Producto: ${carritoDeCompra[j][1]}
+            Cantidad de unidades: ${carritoDeCompra[j][4]}
+            ¿Está seguro que desea eliminar el producto seleccionado? SI/NO`)
+
+                if (respuesta.toUpperCase() === "SI") {
+                    // eliminar el producto y mostrar msj de exito
+                    carritoDeCompra.splice(indiceProductoEncontrado, 1);
+                    alert("La operación se ha realizado exitosamente")
+
+                } else {
+                    alert("La operación ha sido cancelada")
+                }
+
+            }
+
+        }
+
+    } else {
+        alert("El carrito está vacío");
+        accion = "";
+    }
+
+    repetirOperacion()
+
+}
+
 const vaciarCarrito = () => {
     let confirmarVaciarCarrito = prompt(`Desea confirmar la acción? Se quitarán todos los productos del carrito.`)
     confirmarVaciarCarrito = confirmarVaciarCarrito.toUpperCase()
@@ -182,8 +217,7 @@ while (accion != "SALIR") {
         cancelarCompra()
     }
     else if (accion == "ELIMINAR") {
-        alert(`falta funcion ELIMINAR`)
-        accion = ""
+        eliminarProducto()
     }
     else if (accion == "VACIAR") {
         vaciarCarrito()
