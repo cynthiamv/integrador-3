@@ -34,6 +34,8 @@ let productosAlaVenta = [
 ]
 let carritoDeCompra = [];
 let accion = "";
+let codigoDescuento = "ADALOVELACE"
+let descuento = 0.2
 
 //Bienvenida
 
@@ -56,6 +58,8 @@ alert(`Bienvenido a nuestra tienda, estos son nuestros productos:
 //...............AGREGAR productos al carrito..............
 
 const agregarAlCarrito = () => {
+    let subtotal = 0
+    let subtotalNuevo = 0;
     let productoNuevo = []
     let productoAAgregar = prompt(`${catalogo()}
     Indique el id del productor que desea agregar al carrito`);
@@ -71,17 +75,22 @@ const agregarAlCarrito = () => {
             if (carritoDeCompra.length == 0) {
                 carritoDeCompra.push(productosAlaVenta[i])
                 carritoDeCompra[0][4] = cantidadAAgregar
+                subtotal = cantidadAAgregar * productosAlaVenta[i][2];
+                carritoDeCompra[0][5] = subtotal
             }
             else {
                 for (let k = 0; k < carritoDeCompra.length; k++) {
                     if (carritoDeCompra[k][0] == productoAAgregar) {
                         carritoDeCompra[k][4] += cantidadAAgregar
+                        carritoDeCompra[k][5] += productosAlaVenta[i][2] * cantidadAAgregar;
                         break;
                     }
                     else {
                         // debugger
                         productoNuevo.push(cantidadAAgregar)
                         console.log(productoNuevo)
+                        subtotalNuevo = cantidadAAgregar * productosAlaVenta[i][2];
+                        productoNuevo.push(subtotalNuevo)
                         carritoDeCompra.push(productoNuevo)
                         console.log(carritoDeCompra)
                         break;
@@ -118,6 +127,89 @@ const mostrarDetalle = () => {
     }
     return detalleDelCarrito;
 }
+
+const mostrarDetalleActualizado = () => {
+    let detalle = mostrarDetalle(carritoDeCompra);
+    let cantidadProductos = contarTotalDeProductos(carritoDeCompra);
+    let total = subtotalDeCompra(carritoDeCompra);
+
+    if (carritoDeCompra.length != 0) {
+        alert(` Detalle de su compra: 
+          ${detalle}
+          Cantidad de unidades en el carrito: ${cantidadProductos}
+          Precio Total: $ ${total} `)
+    } else {
+        alert(`El carrito está vacío. Ingrese al menú principal para agregar productos.`);
+    }
+
+}
+
+const mostrarDetalleConDescuento = () => {
+
+    let totalConDescuento = totalDescuento(carritoDeCompra);
+    let ahorro = subtotalDeCompra(carritoDeCompra) - totalConDescuento;
+
+    return `${mostrarDetalle(carritoDeCompra)}
+            Total con descuento: $ ${totalConDescuento}
+            Ahorro: $ ${ahorro}`;
+}
+
+const contarTotalDeProductos = carrito => {
+    let cantidad = 0;
+
+    for (let i = 0; i < carrito.length; i++) {
+        cantidad += Number(carrito[i][4]);
+    }
+
+    return cantidad;
+}
+
+
+const subtotalDeCompra = carrito => {
+    let total = 0;
+
+    for (let i = 0; i < carrito.length; i++) {
+        total += carrito[i][5];
+    }
+
+    return total;
+}
+
+const totalDescuento = carrito => {
+    let totalConDesc = 0;
+    for (let i = 0; i < carrito.length; i++) {
+        if (carrito[i][3] == "si") {
+            totalConDesc += carrito[i][5] * (1 - descuento)
+        } else {
+            totalConDesc += carrito[i][5]
+        }
+    }
+    return totalConDesc
+}
+
+const confirmarCompra = () => {
+    mostrarDetalleActualizado(carritoDeCompra)
+    let respuestaDescuento = prompt(`Tiene un codigo de descuento? SI/NO`)
+    respuestaDescuento = respuestaDescuento.toUpperCase()
+    if (respuestaDescuento === "SI") {
+        let codigoIngresado = prompt("Ingrese el codigo de descuento")
+        if (codigoIngresado === codigoDescuento) {
+            alert(`El codigo ingresado es correcto`)
+            alert(`${mostrarDetalleConDescuento(carritoDeCompra)}`)
+
+        } else {
+            alert(`El codigo ingresado no es correcto`)
+        }
+    }
+    let confirmacion = prompt(`Desea confirmar la compra? SI/NO`)
+    if (confirmacion.toUpperCase() === "SI") {
+        alert(`La compra ha sido realizada exitosamente, gracias por comprar en nuestra tienda 👋`)
+    } else {
+        alert(`La operación fue cancelada.`)
+        accion = "";
+    }
+}
+
 
 const eliminarProducto = () => {
     if (carritoDeCompra.length > 0) {
@@ -211,10 +303,10 @@ while (accion != "SALIR") {
         agregarAlCarrito()
     }
     else if (accion == "MOSTRAR") {
-        alert(mostrarDetalle())
+        mostrarDetalleActualizado(carritoDeCompra)
     }
-    else if (accion == "CANCELAR") {
-        cancelarCompra()
+    else if (accion == "CONFIRMAR") {
+        confirmarCompra()
     }
     else if (accion == "ELIMINAR") {
         eliminarProducto()
