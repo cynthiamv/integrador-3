@@ -43,16 +43,16 @@ const catalogo = () => {
     let mostrarProductos = "";
     for (let i = 0; i < productosAlaVenta.length; i++) {
         mostrarProductos = mostrarProductos + `
-        ID: ${productosAlaVenta[i][0]}  
+        🆔: ${productosAlaVenta[i][0]}  
         ${productosAlaVenta[i][1]}
-        Precio: $ ${productosAlaVenta[i][2]}
+        💰 Precio: $ ${productosAlaVenta[i][2]}
         `;
         // Aplica descuento: ${productosAlaVenta[i][3]}  
     }
     return mostrarProductos
 }
-alert(`Bienvenid@ a nuestra tienda! 
-Este es nuestro catálogo:
+alert(`Bienvenid@ a nuestra tienda 🏪! 
+Estos son los productos de nuestro catálogo:
     ${catalogo()}`)
 
 
@@ -70,7 +70,7 @@ const agregarAlCarrito = () => {
     for (let i = 0; i < productosAlaVenta.length; i++) {
         // for (let j = 0; j < productosAlaVenta[i][0].length; j++) {
         if (productoAAgregar == productosAlaVenta[i][0]) {
-            let cantidadAAgregar = Number(prompt("¿Cuántas unidades desea agregar?"))
+            let cantidadAAgregar = Number(prompt(`➕ ¿Cuántas unidades desea agregar?`))
             // cantidadAAgregar = Number(cantidadAAgregar)
             idValido = true
             productoNuevo = productosAlaVenta[i]
@@ -123,8 +123,8 @@ const mostrarDetalle = () => {
         }
         detalleDelCarrito += `
                        🆔 ID: ${carritoDeCompra[i][0]} 
-                       👤 Producto: ${carritoDeCompra[i][1]}
-                       Precio: $ ${carritoDeCompra[i][2]}
+                       🔘 Producto: ${carritoDeCompra[i][1]}
+                       💰 Precio: $ ${carritoDeCompra[i][2]}
                        Aplica descuento: ${carritoDeCompra[i][3]}
                        Cantidad de unidades: ${carritoDeCompra[i][4]}
                        ----------------------
@@ -142,10 +142,11 @@ const mostrarDetalleActualizado = () => {
     let total = subtotalDeCompra(carritoDeCompra);
 
     if (carritoDeCompra.length != 0) {
-        alert(` Detalle de su compra: 
+        alert(`📍 Detalle de su compra: 
           ${detalle}
-          Cantidad de unidades en el carrito: ${cantidadProductos}
-          Precio Total: $ ${total} `)
+          🔢 Cantidad de unidades en el carrito: ${cantidadProductos}
+          💰 Precio Total: $ ${total}
+          `)
     } else {
         alert(`El carrito está vacío. Ingrese al menú principal para agregar productos.`);
     }
@@ -197,23 +198,23 @@ const totalDescuento = carrito => {
 
 const confirmarCompra = () => {
     mostrarDetalleActualizado(carritoDeCompra)
-    let respuestaDescuento = prompt(`¿Tiene un código de descuento? SI/NO`)
+    let respuestaDescuento = prompt(`❗ ¿Tiene un código de descuento? SI/NO`)
     respuestaDescuento = respuestaDescuento.toUpperCase()
     if (respuestaDescuento === "SI") {
-        let codigoIngresado = prompt("Ingrese el código de descuento")
+        let codigoIngresado = prompt("Ingrese el código de descuento 💸")
         if (codigoIngresado === codigoDescuento) {
-            alert(`El código ingresado es correcto`)
+            alert(`✅ El código ingresado es correcto`)
             alert(`${mostrarDetalleConDescuento(carritoDeCompra)}`)
 
         } else {
-            alert(`El código ingresado es incorrecto`)
+            alert(`⛔ El código ingresado es incorrecto`)
         }
     }
     let confirmacion = prompt(`¿Desea confirmar la compra? SI/NO`)
     if (confirmacion.toUpperCase() === "SI") {
-        alert(`La compra ha sido realizada exitosamente, gracias por comprar en nuestra tienda 👋`)
+        alert(`✅ La compra ha sido realizada exitosamente, gracias por comprar en nuestra tienda 👋`)
     } else {
-        alert(`La operación fue cancelada.`)
+        alert(`⚠ La operación fue cancelada.`)
         accion = "";
     }
 }
@@ -222,23 +223,24 @@ const confirmarCompra = () => {
 const eliminarProducto = () => {
     if (carritoDeCompra.length > 0) {
         let indiceProductoEncontrado = 0
-        let productoAEliminar = parseInt(prompt("Por favor ingrese el ID del producto que desea eliminar"))
+        let productoAEliminar = parseInt(prompt("➖ Por favor ingrese el ID del producto que desea eliminar"))
         for (let j = 0; j < carritoDeCompra.length; j++) {
             if (productoAEliminar === carritoDeCompra[j][0]) {
                 indiceProductoEncontrado = j
                 let respuesta = prompt(`Los datos del producto a eliminar son los siguientes:
-            ID: ${carritoDeCompra[j][0]}
-            Producto: ${carritoDeCompra[j][1]}
-            Cantidad de unidades: ${carritoDeCompra[j][4]}
-            ¿Está seguro que desea eliminar el producto seleccionado? SI/NO`)
+        🆔: ${carritoDeCompra[j][0]}
+        🔘 Producto : ${carritoDeCompra[j][1]}
+        🔢 Cantidad de unidades: ${carritoDeCompra[j][4]}
+
+    ¿Está seguro que desea eliminar el producto seleccionado? SI/NO`)
 
                 if (respuesta.toUpperCase() === "SI") {
                     // eliminar el producto y mostrar msj de exito
                     carritoDeCompra.splice(indiceProductoEncontrado, 1);
-                    alert("La operación se ha realizado exitosamente")
+                    alert("✅ La operación se ha realizado exitosamente")
 
                 } else {
-                    alert("La operación ha sido cancelada")
+                    alert("⚠ La operación ha sido cancelada")
                 }
 
             }
@@ -246,7 +248,7 @@ const eliminarProducto = () => {
         }
 
     } else {
-        alert("El carrito está vacío");
+        alert("🚫 El carrito está vacío");
         accion = "";
     }
 
@@ -255,14 +257,15 @@ const eliminarProducto = () => {
 }
 
 const vaciarCarrito = () => {
-    let confirmarVaciarCarrito = prompt(`¿Desea confirmar la acción? Se quitarán todos los productos del carrito.`)
+    let confirmarVaciarCarrito = prompt(`📛 Se quitarán todos los productos del carrito.
+¿Desea confirmar la acción? SI/NO`)
     confirmarVaciarCarrito = confirmarVaciarCarrito.toUpperCase()
     if (confirmarVaciarCarrito == "SI") {
-        alert(`Ud. ha vaciado el carrito satisfactoriamente.`)
+        alert(`✅ Ud. ha vaciado el carrito satisfactoriamente.`)
         carritoDeCompra = []
     }
     else {
-        alert(`La operación fue cancelada.`)
+        alert(`⚠ La operación fue cancelada.`)
     }
     accion = ""
 }
@@ -271,7 +274,7 @@ const cancelarCompra = () => {
     let confirma = prompt('¿Confirma que quiere cancelar? SI/NO')
     confirma = confirma.toUpperCase()
     if (confirma == "SI") {
-        alert('Hasta pronto')
+        alert('Hasta pronto 👋')
         accion = "SALIR"
     }
     else {
@@ -281,13 +284,12 @@ const cancelarCompra = () => {
 }
 
 const repetirOperacion = () => {
-    let confirmacion = prompt("¿Desea repetir la operacion?");
+    let confirmacion = prompt("🔄 ¿Desea repetir la operacion? SI/NO");
     confirmacion = confirmacion.toUpperCase()
     if (confirmacion === "NO") {
         accion = "";
     } else if (confirmacion !== "SI") {
-        alert(`
-             Opción inválida: Por favor, ingresar una opción correcta`);
+        alert(`🚫 Opción inválida: Por favor, ingresar una opción correcta`);
     }
 }
 
@@ -297,12 +299,12 @@ while (accion != "SALIR") {
     if (accion == "") {
         accion = prompt(`Seleccione una operación:
         --------------------------
-    [AGREGAR] un producto
-    [MOSTRAR] detalle
-    [ELIMINAR] un producto
-    [VACIAR] carrito
-    [CONFIRMAR] compra
-    [CANCELAR] compra`);
+    ➡ [AGREGAR] un producto
+    ➡ [MOSTRAR] detalle
+    ➡ [ELIMINAR] un producto
+    ➡ [VACIAR] carrito
+    ➡ [CONFIRMAR] compra
+    ➡ [CANCELAR] compra`);
         accion = accion.toUpperCase()
     }
     if (accion == "AGREGAR") {
@@ -325,7 +327,7 @@ while (accion != "SALIR") {
         cancelarCompra()
     }
     else {
-        alert(`Opción inválida: Por favor, ingresar una opción correcta`)
+        alert(`🚫 Opción inválida: Por favor ingrese una opción correcta`)
         accion = ""
     }
     
