@@ -316,7 +316,13 @@ while (accion != "SALIR") {
         mostrarDetalleActualizado(carritoDeCompra)
     }
     else if (accion == "CONFIRMAR") {
-        confirmarCompra()
+        if (carritoDeCompra != 0) {
+            confirmarCompra()
+        } else {
+            alert(`El carrito está vacío. Ingrese al menú principal para agregar productos`)
+            accion = ""
+        }
+        
     }
     else if (accion == "ELIMINAR") {
         eliminarProducto()
