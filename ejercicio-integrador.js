@@ -188,7 +188,7 @@ const subtotalDeCompra = carrito => {
 const totalDescuento = carrito => {
     let totalConDesc = 0;
     for (let i = 0; i < carrito.length; i++) {
-        if (carrito[i][3] == "si") {
+        if (carrito[i][3] == "Sí") {
             totalConDesc += carrito[i][5] * (1 - descuento)
         } else {
             totalConDesc += carrito[i][5]
