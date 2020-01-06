@@ -1,43 +1,13 @@
-
-// const eliminarProducto = () => {
-
-// }
-// const vaciarCarrito = () => {
-
-// }
-// const confirmarCompra = () => {
-
-// }
-// const cancelarCompra = () => {
-
-// }
-// const contarTotalDeProductos = () => { //recibe el array del carrito de compras y tiene que retornar la cantidad de productos en el carrito
-
-// }
-// const subtotalDeLaCompra = () => { //recibe el array del carrito de compras y tiene que retornar el monto total del carrito
-
-// }
-// const totatlDescuento = () => { //recibe el array del carrito de compras y tiene que retornar el monto total del descuento que aplica.
-//     //  Como no todos los productos aplican para descuento, solo se debe calcular sobre el subtotal de los productos que si aplican
-
-// }
-// const mostrarProductosdelCarrito = () => { //recibe el array del carrito de compras y muestra el listado de productos con los siguientes datos: nombre del producto, precio, cantidad y subtotal (precio x cantidad)
-
-// }
-
-
 let productosAlaVenta = [
     [1, "Notebook Lenobo S400", 100, "si"],
     [2, "Celular Notorola G5", 135, "no"],
     [3, "Smart TV Filis 43'", 190, "si"],
     [4, "Sorny PS 7", 215, "si"]
-]
+];
 let carritoDeCompra = [];
 let accion = "";
-let codigoDescuento = "ADALOVELACE"
-let descuento = 0.2
-
-//Bienvenida
+let codigoDescuento = "ADALOVELACE";
+let descuento = 0.2;
 
 const catalogo = () => {
     let mostrarProductos = "";
@@ -47,16 +17,12 @@ const catalogo = () => {
         ${productosAlaVenta[i][1]}
         💰 Precio: $ ${productosAlaVenta[i][2]}
         `;
-        // Aplica descuento: ${productosAlaVenta[i][3]}  
     }
     return mostrarProductos
 }
 alert(`Bienvenid@ a nuestra tienda 🏪! 
 Estos son los productos de nuestro catálogo:
     ${catalogo()}`)
-
-
-//...............AGREGAR productos al carrito..............
 
 const agregarAlCarrito = () => {
     let subtotal = 0
@@ -68,10 +34,10 @@ const agregarAlCarrito = () => {
 
     let idValido = false;
     for (let i = 0; i < productosAlaVenta.length; i++) {
-        // for (let j = 0; j < productosAlaVenta[i][0].length; j++) {
+
         if (productoAAgregar == productosAlaVenta[i][0]) {
             let cantidadAAgregar = Number(prompt(`➕ ¿Cuántas unidades desea agregar?`))
-            // cantidadAAgregar = Number(cantidadAAgregar)
+
             idValido = true
             productoNuevo = productosAlaVenta[i]
             if (carritoDeCompra.length == 0) {
@@ -79,35 +45,28 @@ const agregarAlCarrito = () => {
                 carritoDeCompra[0][4] = cantidadAAgregar
                 subtotal = cantidadAAgregar * productosAlaVenta[i][2];
                 carritoDeCompra[0][5] = subtotal
-            }
-            else {
+            } else {
                 for (let k = 0; k < carritoDeCompra.length; k++) {
                     if (carritoDeCompra[k][0] == productoAAgregar) {
                         carritoDeCompra[k][4] += cantidadAAgregar
                         carritoDeCompra[k][5] += productosAlaVenta[i][2] * cantidadAAgregar;
                         break;
-                    }
-                    else {
-                        // debugger
+                    } else {
                         productoNuevo.push(cantidadAAgregar)
-                        console.log(productoNuevo)
                         subtotalNuevo = cantidadAAgregar * productosAlaVenta[i][2];
                         productoNuevo.push(subtotalNuevo)
                         carritoDeCompra.push(productoNuevo)
-                        console.log(carritoDeCompra)
                         break;
                     };
-
 
                 }
             }
         }
-        // }
+
     }
     if (idValido === false) {
         alert("Ingrese un ID valido")
     }
-    console.log(carritoDeCompra)
     repetirOperacion()
 }
 
@@ -117,8 +76,7 @@ const mostrarDetalle = () => {
     for (let i = 0; i < carritoDeCompra.length; i++) {
         if (carritoDeCompra[i][3] == "si") {
             carritoDeCompra[i][3] = "Sí"
-        }
-        else {
+        } else {
             carritoDeCompra[i][3] = "No"
         }
         detalleDelCarrito += `
@@ -147,10 +105,7 @@ const mostrarDetalleActualizado = () => {
           🔢 Cantidad de unidades en el carrito: ${cantidadProductos}
           💰 Precio Total: $ ${total}
           `)
-     } 
-    //  else {
-    //     alert(`El carrito está vacío. Ingrese al menú principal para agregar productos.`);
-    // }
+    }
 
 }
 
@@ -236,7 +191,6 @@ const eliminarProducto = () => {
     ¿Está seguro que desea eliminar el producto seleccionado? SI/NO`)
 
                 if (respuesta.toUpperCase() === "SI") {
-                    // eliminar el producto y mostrar msj de exito
                     carritoDeCompra.splice(indiceProductoEncontrado, 1);
                     alert("✅ La operación se ha realizado exitosamente")
 
@@ -264,8 +218,7 @@ const vaciarCarrito = () => {
     if (confirmarVaciarCarrito == "SI") {
         alert(`✅ Ud. ha vaciado el carrito satisfactoriamente.`)
         carritoDeCompra = []
-    }
-    else {
+    } else {
         alert(`⚠ La operación fue cancelada.`)
     }
     accion = ""
@@ -277,8 +230,7 @@ const cancelarCompra = () => {
     if (confirma == "SI") {
         alert('Hasta pronto 👋')
         accion = "SALIR"
-    }
-    else {
+    } else {
         accion = ""
     }
 
@@ -296,7 +248,6 @@ const repetirOperacion = () => {
 
 
 while (accion != "SALIR") {
-    // debugger;
     if (accion == "") {
         accion = prompt(`Seleccione una operación:
         --------------------------
@@ -309,40 +260,33 @@ while (accion != "SALIR") {
         accion = accion.toUpperCase()
     }
     if (accion == "AGREGAR") {
-        //let repetirOperacion = "SI";
+
         agregarAlCarrito()
-    }
-    else if (accion == "MOSTRAR") {
+    } else if (accion == "MOSTRAR") {
         mostrarDetalleActualizado(carritoDeCompra)
-    }
-    else if (accion == "CONFIRMAR") {
+    } else if (accion == "CONFIRMAR") {
         if (carritoDeCompra != 0) {
             confirmarCompra()
         } else {
             alert(`El carrito está vacío. Ingrese al menú principal para agregar productos`)
             accion = ""
         }
-        
-    }
-    else if (accion == "ELIMINAR") {
+
+    } else if (accion == "ELIMINAR") {
         eliminarProducto()
-    }
-    else if (accion == "VACIAR") {
+    } else if (accion == "VACIAR") {
         if (carritoDeCompra != 0) {
             vaciarCarrito()
         } else {
             alert(`El carrito está vacío. Ingrese al menú principal para agregar productos`)
             accion = ""
         }
-        
-    }
-    else if (accion == "CANCELAR") {
+
+    } else if (accion == "CANCELAR") {
         cancelarCompra()
-    }
-    else {
+    } else {
         alert(`🚫 Opción inválida: Por favor ingrese una opción correcta`)
         accion = ""
-    }
-    
-}
+    };
 
+}
