@@ -147,9 +147,10 @@ const mostrarDetalleActualizado = () => {
           🔢 Cantidad de unidades en el carrito: ${cantidadProductos}
           💰 Precio Total: $ ${total}
           `)
-    } else {
-        alert(`El carrito está vacío. Ingrese al menú principal para agregar productos.`);
-    }
+     } 
+    //  else {
+    //     alert(`El carrito está vacío. Ingrese al menú principal para agregar productos.`);
+    // }
 
 }
 
@@ -321,7 +322,13 @@ while (accion != "SALIR") {
         eliminarProducto()
     }
     else if (accion == "VACIAR") {
-        vaciarCarrito()
+        if (carritoDeCompra != 0) {
+            vaciarCarrito()
+        } else {
+            alert(`El carrito está vacío. Ingrese al menú principal para agregar productos`)
+            accion = ""
+        }
+        
     }
     else if (accion == "CANCELAR") {
         cancelarCompra()
