@@ -1,3 +1,9 @@
+// Las felicito chicas, hicieron un excelente trabajo
+// Noto cierta reticencia a usar returns y parametros, estaria bueno que
+// los tengan practicados, pero lo cierto es que su codigo funciona bien sin ellos
+// No tengo muchos comentarios ya que en general hicieron un gran codigo
+// Felicitaciones!
+
 let productosAlaVenta = [
     [1, "Notebook Lenobo S400", 100, "si"],
     [2, "Celular Notorola G5", 135, "no"],
@@ -6,6 +12,8 @@ let productosAlaVenta = [
 ];
 let carritoDeCompra = [];
 let accion = "";
+
+// estas dos variables deberian ser const, ya que no cambian
 let codigoDescuento = "ADALOVELACE";
 let descuento = 0.2;
 
@@ -36,6 +44,10 @@ const agregarAlCarrito = () => {
     for (let i = 0; i < productosAlaVenta.length; i++) {
 
         if (productoAAgregar == productosAlaVenta[i][0]) {
+            // un problema de hacerlo asi es que si ingreso algo que no es un numero
+            // (por ejemplo "asdfgf"), el producto queda guardado con la cantidad NaN
+            // y eso al final del programa afecta al total
+            // mas alla de eso, esta muy bien resuelto
             let cantidadAAgregar = Number(prompt(`➕ ¿Cuántas unidades desea agregar?`))
 
             idValido = true
@@ -74,6 +86,9 @@ const mostrarDetalle = () => {
     let detalleDelCarrito = "";
     accion = "";
     for (let i = 0; i < carritoDeCompra.length; i++) {
+
+        // me llama la atencion este if. por que no escribirlo como "Sí" directamente?
+        // (o mejor, true!)
         if (carritoDeCompra[i][3] == "si") {
             carritoDeCompra[i][3] = "Sí"
         } else {
@@ -143,6 +158,9 @@ const subtotalDeCompra = carrito => {
 const totalDescuento = carrito => {
     let totalConDesc = 0;
     for (let i = 0; i < carrito.length; i++) {
+        // preferimos usar booleanos en parte porque simplifican el codigo
+        // si carrito[i][3] fuera true o false, podriamos escribir:
+        // if (carrito[i][3]) {
         if (carrito[i][3] == "Sí") {
             totalConDesc += carrito[i][5] * (1 - descuento)
         } else {
